@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "build:ts": "tsc",
+    "minify": "terser dist/**/*.js --compress --mangle --output dist/",
+    "compress": "gzipper compress dist",
+    "build": "npm run clean && npm run build:ts && npm run minify && npm run compress",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +25,15 @@
   },
   "homepage": "https://github.com/YoussefAchraf/xprssBE#readme",
   "dependencies": {
+    "compression": "^1.8.1",
     "express": "^5.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.0",
+    "gzipper": "^8.2.1",
+    "rimraf": "^6.1.0",
+    "terser": "^5.44.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
